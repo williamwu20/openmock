@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"fmt"
 	"github.com/checkr/openmock"
 	"github.com/checkr/openmock/swagger_gen/models"
 	"github.com/checkr/openmock/swagger_gen/restapi/operations"
@@ -27,6 +28,9 @@ func Setup(api *operations.OpenMockAPI, customOpenmock *openmock.OpenMock) bool 
 	// Setup swagger API
 	setupHealth(api)
 	setupCRUD(api, om)
+
+	fmt.Println("swagger api started")
+	fmt.Println(om.AdminHTTPEnabled)
 
 	return om.AdminHTTPEnabled
 }
