@@ -35,6 +35,7 @@ type Context struct {
 	AMQPPayload    string
 
 	GraphQLSchema string
+	GraphQLQuery  string
 
 	Values map[string]interface{}
 
@@ -82,14 +83,16 @@ func (c Context) MatchCondition(condition string) (r bool) {
 		if r {
 			logger.Info("ok match condition")
 			logger.WithFields(logrus.Fields{
-				"HTTPHeader":   c.HTTPHeader,
-				"HTTPBody":     c.HTTPBody,
-				"GRPCHeader":   c.GRPCHeader,
-				"GRPCPayload":  c.GRPCPayload,
-				"KafkaPayload": c.KafkaPayload,
-				"AMQPPayload":  c.AMQPPayload,
-				"condition":    condition,
-				"result":       r,
+				"HTTPHeader":    c.HTTPHeader,
+				"HTTPBody":      c.HTTPBody,
+				"GRPCHeader":    c.GRPCHeader,
+				"GRPCPayload":   c.GRPCPayload,
+				"KafkaPayload":  c.KafkaPayload,
+				"AMQPPayload":   c.AMQPPayload,
+				"GraphQLSchema": c.GraphQLSchema,
+				"GraphQLQuery":  c.GraphQLQuery,
+				"condition":     condition,
+				"result":        r,
 			}).Debug("running MatchCondition")
 		}
 	}()
