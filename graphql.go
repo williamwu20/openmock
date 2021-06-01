@@ -54,7 +54,6 @@ func (om *OpenMock) startGraphQL() {
 		func(g ExpectGraphQL, ms MocksArray) {
 			c := Context{
 				GraphQLSchema: g.Schema,
-				GraphQLQuery:  g.Query,
 				om:            om,
 			}
 			ms.DoActions(c)

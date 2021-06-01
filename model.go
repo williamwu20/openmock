@@ -143,7 +143,6 @@ type (
 	// ExpectGraphQL represents GraphQL expectation
 	ExpectGraphQL struct {
 		Schema string `yaml:"schema,omitempty"`
-		Query  string `yaml:"query,omitempty"`
 	}
 )
 

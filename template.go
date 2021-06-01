@@ -35,7 +35,6 @@ type Context struct {
 	AMQPPayload    string
 
 	GraphQLSchema string
-	GraphQLQuery  string
 
 	Values map[string]interface{}
 
