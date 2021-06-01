@@ -34,6 +34,9 @@ type Context struct {
 	AMQPQueue      string
 	AMQPPayload    string
 
+	GraphQLSchema string
+	GraphQLQuery  string
+
 	Values map[string]interface{}
 
 	om          *OpenMock

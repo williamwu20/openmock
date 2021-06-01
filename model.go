@@ -89,13 +89,17 @@ type (
 	// AMQPMocks is keyed by Queue name
 	AMQPMocks map[ExpectAMQP]MocksArray
 
+	// GraphQLMocks is keyed by Queue name
+	GraphQLMocks map[ExpectGraphQL]MocksArray
+
 	// MockRepo stores a repository of Mocks
 	MockRepo struct {
-		HTTPMocks  HTTPMocks
-		GRPCMocks  GRPCMocks
-		KafkaMocks KafkaMocks
-		AMQPMocks  AMQPMocks
-		Templates  MocksArray
+		HTTPMocks    HTTPMocks
+		GRPCMocks    GRPCMocks
+		KafkaMocks   KafkaMocks
+		AMQPMocks    AMQPMocks
+		GraphQLMocks GraphQLMocks
+		Templates    MocksArray
 
 		Behaviors *orderedmap.OrderedMap
 	}
@@ -104,11 +108,12 @@ type (
 type (
 	// Expect represents what to expect from a mock
 	Expect struct {
-		Condition string      `yaml:"condition,omitempty"`
-		HTTP      ExpectHTTP  `yaml:"http,omitempty"`
-		Kafka     ExpectKafka `yaml:"kafka,omitempty"`
-		AMQP      ExpectAMQP  `yaml:"amqp,omitempty"`
-		GRPC      ExpectGRPC  `yaml:"grpc,omitempty"`
+		Condition string        `yaml:"condition,omitempty"`
+		HTTP      ExpectHTTP    `yaml:"http,omitempty"`
+		Kafka     ExpectKafka   `yaml:"kafka,omitempty"`
+		AMQP      ExpectAMQP    `yaml:"amqp,omitempty"`
+		GRPC      ExpectGRPC    `yaml:"grpc,omitempty"`
+		GraphQL   ExpectGraphQL `yaml:"graphql,omitempty"`
 	}
 
 	// ExpectKafka represents kafka expectation
@@ -134,6 +139,12 @@ type (
 		Service string `yaml:"service,omitempty"`
 		Method  string `yaml:"method,omitempty"`
 	}
+
+	// ExpectGraphQL represents GraphQL expectation
+	ExpectGraphQL struct {
+		Schema string `yaml:"schema,omitempty"`
+		Query  string `yaml:"query,omitempty"`
+	}
 )
 
 // Action represents actions
@@ -146,6 +157,7 @@ type ActionDispatcher struct {
 	ActionSendHTTP     ActionSendHTTP     `yaml:"send_http,omitempty"`
 	ActionReplyGRPC    ActionReplyGRPC    `yaml:"reply_grpc,omitempty"`
 	ActionSleep        ActionSleep        `yaml:"sleep,omitempty"`
+	ActionReplyGraphQL ActionReplyGraphQL `yaml:"reply_graphql,omitempty"`
 }
 
 type Action interface {
@@ -154,6 +166,12 @@ type Action interface {
 
 // ActionRedis represents a list of redis commands
 type ActionRedis []string
+
+// ActionQueryGraphQL represents query GraphQL
+type ActionReplyGraphQL struct {
+	Response         string `yaml:"response,omitempty"`
+	ResponseFromFile string `yaml:"response_from_file,omitempty"`
+}
 
 // ActionSendHTTP represents the send http action
 type ActionSendHTTP struct {

@@ -44,6 +44,11 @@ type OpenMock struct {
 	GRPCPort    int    `env:"OPENMOCK_GRPC_PORT" envDefault:"50051"`
 	GRPCHost    string `env:"OPENMOCK_GRPC_HOST" envDefault:"0.0.0.0"`
 
+	//GraphQL Channel
+	GraphQLEnabled bool   `env:"OPENMOCK_GRAPHQL_ENABLED" envDefault:"false"`
+	GraphQLPort    int    `env:"OPENMOCK_GRAPHQL_PORT" envDefault:"9876"`
+	GraphQLHost    string `env:"OPENMOCK_GRAPHQL_HOST" envDefault:"0.0.0.0"`
+
 	//////////////////////// Customized functions //////////////////////////////////
 	// KafkaConsumePipelineFunc is a pipeline function run to when consume a message
 	KafkaConsumePipelineFunc KafkaPipelineFunc
@@ -86,12 +91,13 @@ func (om *OpenMock) SetupLogrus() {
 
 func (om *OpenMock) SetupRepo() {
 	om.repo = &MockRepo{
-		HTTPMocks:  HTTPMocks{},
-		KafkaMocks: KafkaMocks{},
-		AMQPMocks:  AMQPMocks{},
-		GRPCMocks:  GRPCMocks{},
-		Templates:  MocksArray{},
-		Behaviors:  orderedmap.NewOrderedMap(),
+		HTTPMocks:    HTTPMocks{},
+		KafkaMocks:   KafkaMocks{},
+		AMQPMocks:    AMQPMocks{},
+		GRPCMocks:    GRPCMocks{},
+		GraphQLMocks: GraphQLMocks{},
+		Templates:    MocksArray{},
+		Behaviors:    orderedmap.NewOrderedMap(),
 	}
 }
 
@@ -117,6 +123,9 @@ func (om *OpenMock) Start() {
 	}
 	if om.GRPCEnabled {
 		go om.startGRPC()
+	}
+	if om.GraphQLEnabled {
+		go om.startGraphQL()
 	}
 
 	if om.TemplatesDirHotReload {

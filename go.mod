@@ -34,9 +34,12 @@ require (
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/uuid v1.1.1
 	github.com/goombaio/orderedmap v0.0.0-20180925151256-3da0e2f905f9
+	github.com/graph-gophers/graphql-go v1.1.0 // indirect
+	github.com/graphql-go/graphql v0.7.9 // indirect
 	github.com/huandu/xstrings v1.0.0 // indirect
 	github.com/imdario/mergo v0.3.9
 	github.com/jessevdk/go-flags v1.4.0
+	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/labstack/echo/v4 v4.1.16
 	github.com/moul/http2curl v1.0.0 // indirect
@@ -48,7 +51,7 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/prashantv/gostub v1.0.0
 	github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a // indirect
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.8.1
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/spf13/cast v1.3.0
 	github.com/spf13/cobra v0.0.5
